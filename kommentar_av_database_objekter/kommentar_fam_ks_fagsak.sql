@@ -1,0 +1,17 @@
+comment on table dvh_fam_ks.fam_ks_fagsak is '#NAVN Fagsak #INNHOLD Tabellen inneholder vedtaksinformasjon til kontantstøtte.';
+comment on column dvh_fam_ks.fam_ks_fagsak.pk_ks_fagsak is '#NAVN Primær nøkkel #INNHOLD Primær nøkkel, en unik id. Verdien kommer fra behandlings_id som er unik.';
+comment on column dvh_fam_ks.fam_ks_fagsak.kafka_offset is '#NAVN Kafka Offset #INNHOLD Kafka offset av kafka topic-en hvor jsonmelding til vedtaket kommer fra.';
+comment on column dvh_fam_ks.fam_ks_fagsak.fagsak_id is '#NAVN Fagsak Id #INNHOLD Fagsak_id fra vedtaksystem.';
+comment on column dvh_fam_ks.fam_ks_fagsak.behandlings_id is '#NAVN Behandlings Id #INNHOLD Behandlings_id fra vedtaksystem. Kan identifisere versjon av fagsak.';
+comment on column dvh_fam_ks.fam_ks_fagsak.tidspunkt_vedtak is '#NAVN Vedtaks tidspunkt #INNHOLD Tidspunkt for når vedtaket er fattet.';
+comment on column dvh_fam_ks.fam_ks_fagsak.fk_person1_mottaker is '#NAVN FK_PERSON1 til Mottaker #INNHOLD DVH sin identifikator for FNR. Mottakeren knyttet til ytelse.';
+comment on column dvh_fam_ks.fam_ks_fagsak.delingsprosent_ytelse is '#NAVN Delingsprosent av ytelse #INNHOLD Er ikke i bruk.';
+comment on column dvh_fam_ks.fam_ks_fagsak.lastet_dato is '#NAVN Lastet dato #INNHOLD Lastet dato når data ble pakket ut av DBT.';
+comment on column dvh_fam_ks.fam_ks_fagsak.kafka_mottatt_dato is '#NAVN Kafka mottatt dato #INNHOLD Tidspunkt til når vedtaket er kommet på kafka_topic-en.';
+comment on column dvh_fam_ks.fam_ks_fagsak.fk_ks_meta_data is '#NAVN Fremmednøkkel til metadata #INNHOLD Fremmednøkkel til FAM_KS_META_DATA.';
+comment on column dvh_fam_ks.fam_ks_fagsak.kategori is '#NAVN Kategori #INNHOLD Vedtakets kategori og det er enten NASJONAL (Norge) eller EØS.';
+comment on column dvh_fam_ks.fam_ks_fagsak.behandling_type is '#NAVN Behandlings type #INNHOLD Fra vedtak og kan være FØRSTEGANGSBEHANDLING, REVURDERING eller TEKNISK_ENDRING.';
+comment on column dvh_fam_ks.fam_ks_fagsak.funksjonell_id is '#NAVN Funksjonell Id #INNHOLD Funksjonell id fra vedtaksystem.';
+comment on column dvh_fam_ks.fam_ks_fagsak.behandling_aarsak is '#NAVN Behandlings årsak #INNHOLD Årsaken til behandling av vedtaket. Kan være f.eks. BARNEHAGELISTE.';
+comment on column dvh_fam_ks.fam_ks_fagsak.rolle is '#NAVN Rolle #INNHOLD SØKER.';
+comment on column dvh_fam_ks.fam_ks_fagsak.bosteds_land is '#NAVN Bosteds land #INNHOLD Bosteds land til mottakeren. Kan være NO eller ZZ(EØS sak).';
