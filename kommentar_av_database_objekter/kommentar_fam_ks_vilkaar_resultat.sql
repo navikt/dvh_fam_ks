@@ -1,0 +1,11 @@
+comment on table dvh_fam_ks.fam_ks_vilkaar_resultat is '#NAVN Vilkår resultat #INNHOLD Tabellen inneholder vilkår resultat til kontantstøtte.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.pk_ks_vilkaar_resultat is '#NAVN Primær nøkkel #INNHOLD Primær nøkkel, en unik id. Verdien er generert av dvh_fam_ks.hibernate_sequence.nextval.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.antall_timer is '#NAVN Antall timer #INNHOLD Antall timer av barnehageplass for vilkår type BARNEHAGEPLASS.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.periode_fom is '#NAVN Periode fom #INNHOLD Periode fra dato.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.periode_tom is '#NAVN Periode tom #INNHOLD Periode til dato.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.fk_ks_fagsak is '#NAVN Fremmednøkkel #INNHOLD Fremmednøkkel til FAM_KS_FAGSAK.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.fk_person1 is '#NAVN FK_PERSON1 #INNHOLD DVH sin identifikator for FNR. Det kan være enten mottaker eller barn avhengig av hvilken type vilkår.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.lastet_dato is '#NAVN Lastet dato #INNHOLD Lastet dato når data ble pakket ut av DBT.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.resultat is '#NAVN Resultat #INNHOLD OPPFYLT, IKKE_OPPFYLT eller IKKE_AKTUELT.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.ident is '#NAVN Ident #INNHOLD Ident til når fk_person1=-1.';
+comment on column dvh_fam_ks.fam_ks_vilkaar_resultat.vilkaar_type is '#NAVN Vilkår type #INNHOLD Vilkår type til vedtaket for en periode, og det kan være f.eks.BARNEHAGEPLASS.';

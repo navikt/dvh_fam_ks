@@ -1,0 +1,10 @@
+comment on table dvh_fam_ks.fam_ks_utbet_det is '#NAVN Utbetalingsdetaljer #INNHOLD Tabellen inneholder utbetalingsdetaljer til kontantstøtte.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.pk_ks_utbet_det is '#NAVN Primær nøkkel #INNHOLD Primær nøkkel, en unik id. Verdien er kombinasjon av behandlings_id, stonad_fom, stonad_tom og delytelse_id.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.kafka_offset is '#NAVN Kafka Offset #INNHOLD Kafka offset av kafka topic-en hvor jsonmelding til vedtaket kommer fra.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.utbetalt_per_mnd is '#NAVN Utbetalt per måned #INNHOLD Utbetalt månedsbeløp.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.delytelse_id is '#NAVN DelytelseId #INNHOLD Delytelse_id fra vedtaksystem. Skulle være 1:1 mapping mot barn.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.fk_person1_barn is '#NAVN FK_PERSON1 til barn #INNHOLD DVH sin identifikator for FNR. Barnet knyttet til ytelse.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.fk_ks_utbetaling is '#NAVN Fremmednøkkel #INNHOLD Fremmednøkkel til FAM_KS_UTBETALING.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.hjemmel is '#NAVN Hjemmel #INNHOLD Ikke implementert.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.lastet_dato is '#NAVN Lastet dato #INNHOLD Lastet dato når data ble pakket ut av DBT.';
+comment on column dvh_fam_ks.fam_ks_utbet_det.klassekode is '#NAVN Klassekode #INNHOLD KS eller OO.';
