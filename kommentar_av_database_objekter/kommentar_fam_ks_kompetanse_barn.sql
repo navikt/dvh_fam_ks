@@ -1,0 +1,4 @@
+comment on table dvh_fam_ks.fam_ks_kompetanse_barn is '#NAVN Kompetanse barn #INNHOLD Tabellen inneholder informasjon om barn knyttet til EØS sak av kontantstøtte.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_barn.pk_ks_kompetanse_barn is '#NAVN Primær nøkkel #INNHOLD Primær nøkkel, en unik id, autogenerert av dvh_fam_ks.hibernate_sequence.nextval.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_barn.fk_ks_kompetanse_perioder is '#NAVN Fremmednøkkel #INNHOLD Fremmednøkkel til FAM_KS_KOMPETANSE_PERIODER.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_barn.fk_person1 is '#NAVN FK_PERSON1 #INNHOLD DVH sin identifikator for FNR. Barn knyttet til EØS sak.';

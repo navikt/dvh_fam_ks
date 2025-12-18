@@ -1,0 +1,14 @@
+comment on table dvh_fam_ks.fam_ks_kompetanse_perioder is '#NAVN Kompetanse perioder #INNHOLD Tabellen inneholder EØS informasjon av vedtaket til kontantstøtte.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.pk_ks_kompetanse_perioder is '#NAVN Primær nøkkel #INNHOLD Primær nøkkel, en unik id, autogenerert av dvh_fam_ks.hibernate_sequence.nextval.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.fk_ks_fagsak is '#NAVN Fremmednøkkel #INNHOLD Fremmednøkkel til FAM_KS_FAGSAK.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.kafka_offset is '#NAVN Kafka offset #INNHOLD Kafka offset av kafka topic-en hvor jsonmelding til vedtaket kommer fra.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.lastet_dato is '#NAVN Lastet dato #INNHOLD Dato data ble pakket ut av DBT.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.fom is '#NAVN FOM #INNHOLD Kompetanse periode fra dato.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.tom is '#NAVN TOM #INNHOLD Kompetanse periode til dato';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.kompetanse_aktivitet is '#NAVN Søkers aktivitet #INNHOLD Søkers aktivitet i søkt periode.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.sokers_aktivitetsland is '#NAVN Søkers aktivitetsland #INNHOLD Søkers aktivitetsland i søkt periode.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.annen_forelders_aktivitet is '#NAVN Annenforelders aktivitet #INNHOLD Annenforelders aktivitet i søkt periode.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.annen_forelders_aktivitetsland is '#NAVN Annenforelders aktivitetsland #INNHOLD Annenforelders aktivitetsland i søkt periode.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.kompetanse_resultat is '#NAVN Kompetanse resultat #INNHOLD Kan være NORGE_ER_PRIMÆRLAND, NORGE_ER_SEKUNDÆRLAND eller TO_PRIMÆRLAND.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.barnets_bostedsland is '#NAVN Barnets bostedsland #INNHOLD Barnets bostedsland i søkt periode.';
+comment on column dvh_fam_ks.fam_ks_kompetanse_perioder.annen_forelder_omfattet_av_norsk_lovgivning is '#NAVN Annen forelder omfattet av norsk lovgivning #INNHOLD 0(false).';
