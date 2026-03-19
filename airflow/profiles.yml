@@ -10,6 +10,7 @@ dvh_fam_ks:
       port: 1521
       service: "{{env_var('DBT_ORCL_SERVICE')}}"
       schema: "{{env_var('DBT_ORCL_SCHEMA')}}"
+      database: "{{env_var('DBT_ORCL_DB')}}"
       threads: 7
   session_info:
     client_info: "{{env_var('DBT_ORCL_USER_PROXY', 'DVH_FAM_DBT')}}"
