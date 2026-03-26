@@ -30,7 +30,7 @@ pre_final as (
                 delytelse_id     NUMBER(16,2) PATH '$.delytelseId',
                 nested path '$.person'
                   columns(
-                    person_ident VARCHAR2(255) PATH  '$.personIdent',
+                    person_ident VARCHAR2(255) PATH  '$.personIdent'
                     --rolle path '$.rolle',
                     --bosteds_land path '$.bostedsland',
                     --delingsprosent_ytelse path '$.delingsprosentYtelse'
