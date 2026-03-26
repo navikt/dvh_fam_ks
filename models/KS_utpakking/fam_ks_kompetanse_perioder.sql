@@ -12,18 +12,18 @@ pre_final as (
 select * from kontanststotte_meta_data,
   json_table(melding, '$'
     COLUMNS (
-      behandlings_id      path '$.behandlingsId',
+      behandlings_id      NUMBER(38,0) PATH '$.behandlingsId',
       NESTED              PATH '$.kompetanseperioder[*]'
       COLUMNS (
-         tom                            VARCHAR2 PATH '$.tom'
-        ,fom                            VARCHAR2 PATH '$.fom'
-        ,kompetanse_aktivitet           VARCHAR2 PATH  '$.kompetanseAktivitet'
-        ,kompetanse_Resultat            VARCHAR2 PATH '$.resultat'
-        ,barnets_bostedsland            Varchar2 path '$.barnetsBostedsland'
-        ,SOKERS_AKTIVITETSLAND           Varchar2 path '$.sokersAktivitetsland'
-        ,ANNEN_FORELDERS_AKTIVITET        Varchar2 path '$.annenForeldersAktivitet'
-        ,ANNEN_FORELDERS_AKTIVITETSLAND   Varchar2 path '$.annenForeldersAktivitetsland'
-        ,ANNEN_FORELDER_OMFATTET_AV_NORSK_LOVGIVNING VARCHAR2 path '$.annenForelderOmfattetAvNorskLovgivning'
+         tom                                         VARCHAR2(255) PATH '$.tom'
+        ,fom                                         VARCHAR2(255) PATH '$.fom'
+        ,kompetanse_aktivitet                        VARCHAR2(255) PATH  '$.kompetanseAktivitet'
+        ,kompetanse_Resultat                         VARCHAR2(255) PATH '$.resultat'
+        ,barnets_bostedsland                         VARCHAR2(255) PATH '$.barnetsBostedsland'
+        ,SOKERS_AKTIVITETSLAND                       VARCHAR2(255) PATH '$.sokersAktivitetsland'
+        ,ANNEN_FORELDERS_AKTIVITET                   VARCHAR2(255) PATH '$.annenForeldersAktivitet'
+        ,ANNEN_FORELDERS_AKTIVITETSLAND              VARCHAR2(255) PATH '$.annenForeldersAktivitetsland'
+        ,ANNEN_FORELDER_OMFATTET_AV_NORSK_LOVGIVNING VARCHAR2(255) PATH '$.annenForelderOmfattetAvNorskLovgivning'
     ))
     )j
     where json_value (melding, '$.kompetanseperioder.size()' )> 0
@@ -32,8 +32,8 @@ select * from kontanststotte_meta_data,
 final as (
   select
   behandlings_id as fk_ks_fagsak,
-  tom,
-  fom,
+  TO_CHAR(TO_DATE(fom, 'YYYY-MM'), 'YYYYMM'),
+  TO_CHAR(TO_DATE(tom, 'YYYY-MM'), 'YYYYMM'),
   kompetanse_aktivitet,
   kompetanse_Resultat,
   barnets_bostedsland,
@@ -41,8 +41,9 @@ final as (
   SOKERS_AKTIVITETSLAND,
   ANNEN_FORELDERS_AKTIVITET,
   ANNEN_FORELDERS_AKTIVITETSLAND,
-  CASE when ANNEN_FORELDER_OMFATTET_AV_NORSK_LOVGIVNING = 'false' then 0
-    else 1
+  CASE 
+    WHEN ANNEN_FORELDER_OMFATTET_AV_NORSK_LOVGIVNING = 'false' then 0
+    ELSE 1
   END ANNEN_FORELDER_OMFATTET_AV_NORSK_LOVGIVNING
   from pre_final
 )

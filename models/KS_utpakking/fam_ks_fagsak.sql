@@ -12,19 +12,19 @@ pre_final as (
 select * from ks_meta_data,
   json_table(melding, '$'
     columns(
-      fagsak_id  path  '$.fagsakId',
-      behandlings_id  path '$.behandlingsId',
-      tidspunkt_vedtak  path '$.tidspunktVedtak',
-      kategori  path '$.kategori',
-      behandling_type  path '$.behandlingType',
-      funksjonell_id  path '$.funksjonellId',
-      behandling_aarsak  path '$.behandlingÅrsak',
-        nested path '$.person'
+      fagsak_id  NUMBER(38,0) PATH  '$.fagsakId',
+      behandlings_id  NUMBER(38,0) PATH '$.behandlingsId',
+      tidspunkt_vedtak  TIMESTAMP(9) PATH '$.tidspunktVedtak',
+      kategori  VARCHAR2(255) PATH '$.kategori',
+      behandling_type  VARCHAR2(255) PATH '$.behandlingType',
+      funksjonell_id  VARCHAR2(255) PATH '$.funksjonellId',
+      behandling_aarsak  VARCHAR2(255) PATH '$.behandlingÅrsak',
+        nested PATH '$.person'
           columns(
-            person_ident path '$.personIdent',
-            rolle path '$.rolle',
-            bosteds_land path '$.bostedsland',
-            delingsprosent_ytelse path '$.delingsprosentYtelse'
+            person_ident VARCHAR2(255) PATH '$.personIdent',
+            rolle VARCHAR2(255) PATH '$.rolle',
+            bosteds_land VARCHAR2(255) PATH '$.bostedsland',
+            delingsprosent_ytelse NUMBER(38,0) PATH '$.delingsprosentYtelse'
         )
     )
     ) j
@@ -32,7 +32,7 @@ select * from ks_meta_data,
 
 final as (
   select
-    to_number(behandlings_id) as pk_ks_fagsak,
+    behandlings_id as pk_ks_fagsak,
     kafka_offset,
     fagsak_id,
     behandlings_id,
@@ -51,7 +51,7 @@ final as (
     pk_ks_meta_data as fk_ks_meta_data
   from
     pre_final
-  left outer join dt_person.ident_off_id_til_fk_person1 b on
+  left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b on
     pre_final.person_ident=b.off_id
     and b.gyldig_fra_dato<=pre_final.kafka_mottatt_dato
     and b.gyldig_til_dato>=kafka_mottatt_dato
@@ -63,10 +63,7 @@ select
   kafka_offset,
   fagsak_id,
   behandlings_id,
-  CASE
-    WHEN LENGTH(tidspunkt_vedtak) = 25 THEN CAST(to_timestamp_tz(tidspunkt_vedtak, 'yyyy-mm-dd"T"hh24:mi:ss TZH:TZM') AT TIME ZONE 'Europe/Belgrade' AS TIMESTAMP)
-    ELSE CAST(to_timestamp_tz(tidspunkt_vedtak, 'FXYYYY-MM-DD"T"HH24:MI:SS.FXFF3TZH:TZM') AT TIME ZONE 'Europe/Belgrade' AS TIMESTAMP)
-    END tidspunkt_vedtak,
+  tidspunkt_vedtak,
   kategori,
   behandling_type,
   funksjonell_id,

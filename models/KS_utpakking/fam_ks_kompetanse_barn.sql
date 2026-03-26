@@ -52,7 +52,7 @@ joining_pre_final as (
     barnets_bostedsland
   from
     pre_final
-  left outer join dt_person.ident_off_id_til_fk_person1 b on
+  left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b on
     pre_final.personidentbarn=b.off_id
     and b.gyldig_fra_dato<=pre_final.kafka_mottatt_dato
     and b.gyldig_til_dato>=kafka_mottatt_dato

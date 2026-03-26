@@ -18,23 +18,22 @@ pre_final as (
     select *  from ks_meta_data,
       json_table(melding, '$'
         columns(
-          behandlings_id  path  '$.behandlingsId',
+          behandlings_id  NUMBER(38,0) PATH  '$.behandlingsId',
             nested path '$.utbetalingsperioder[*]'
             columns(
-              hjemmel        path '$.hjemmel',
-              stonad_fom     path '$.stønadFom',
-              stonad_tom     path '$.stønadTom',
+              stonad_fom    DATE  PATH '$.stønadFom',
+              stonad_tom    DATE  PATH '$.stønadTom',
               nested path '$.utbetalingsDetaljer[*]'
               columns(
-                klassekode path '$.klassekode',
-                utbetalt_per_mnd path '$.utbetaltPrMnd',
-                delytelse_id     path '$.delytelseId',
+                klassekode VARCHAR2(255) PATH  '$.klassekode',
+                utbetalt_per_mnd NUMBER(16,2) PATH '$.utbetaltPrMnd',
+                delytelse_id     NUMBER(16,2) PATH '$.delytelseId',
                 nested path '$.person'
                   columns(
-                    person_ident path '$.personIdent',
-                    rolle path '$.rolle',
-                    bosteds_land path '$.bostedsland',
-                    delingsprosent_ytelse path '$.delingsprosentYtelse'
+                    person_ident VARCHAR2(255) PATH  '$.personIdent',
+                    --rolle path '$.rolle',
+                    --bosteds_land path '$.bostedsland',
+                    --delingsprosent_ytelse path '$.delingsprosentYtelse'
                     )
                 ))
           )
@@ -51,20 +50,19 @@ kafka_offset,
 klassekode,
 utbetalt_per_mnd,
 delytelse_id,
-hjemmel,
 person_ident,
 nvl(b.fk_person1, -1) fk_person1_barn,
-rolle,
-to_date(stonad_fom, 'yyyy-mm-dd') stonad_fom,
-to_date(stonad_tom,'yyyy-mm-dd') stonad_tom,
-bosteds_land,
-delingsprosent_ytelse,
+--rolle,
+stonad_fom,
+stonad_tom,
+--bosteds_land,
+--delingsprosent_ytelse,
 kafka_mottatt_dato,
 sysdate lastet_dato,
 to_number(replace(behandlings_id || stonad_fom || stonad_tom, '-', '')) as fk_ks_utbetaling
 from
   pre_final
-left outer join dt_person.ident_off_id_til_fk_person1 b on
+left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b on
   pre_final.person_ident=b.off_id
   and b.gyldig_fra_dato<=pre_final.kafka_mottatt_dato
   and b.gyldig_til_dato>=kafka_mottatt_dato
@@ -74,7 +72,7 @@ left outer join dt_person.ident_off_id_til_fk_person1 b on
 select
   pk_ks_utbet_det,
   kafka_offset,
-  hjemmel,
+  --hjemmel,
   utbetalt_per_mnd,
   --kafka_mottatt_dato,
   lastet_dato,

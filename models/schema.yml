@@ -30,14 +30,15 @@ sources:
       - name: fak_vilkaar_vurdering
         description: ''
 
-  - name: dt_person_arena
+  - name: dt_person
     schema: dt_person
     tables:
       - name: dim_person_kontaktinfo
         description: 'inneholder informasjon om brukere, bla navn, telefon_mobil, k67_flagg osv, '
       - name: dvh_person_ident_off_id_ikke_skjermet
         description: 'inneholder informasjon om personer som er ikke skjemet, bl.a fk_person1, off_id'
-      - name: DIM_PERSON
+      - name: dim_person
+      - name: ident_off_id_til_fk_person1
 
   - name: fam_ks
     schema: dvh_fam_ks

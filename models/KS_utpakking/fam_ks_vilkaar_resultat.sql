@@ -18,37 +18,34 @@ pre_final as (
     select *  from ks_meta_data,
       json_table(melding, '$'
         columns(
-          behandlings_id  number(38,0) path  '$.behandlingsId',
-          nested          path '$.vilkårResultater[*]'
+          behandlings_id  NUMBER(38,0) PATH  '$.behandlingsId',
+          nested          PATH '$.vilkårResultater[*]'
           columns(
-            resultat      varchar2(255) path '$.resultat',
-            antall_timer  number(10,2) path '$.antallTimer',
-            periode_fom   varchar2(255) path '$.periodeFom',
-            periode_tom   varchar2(255) path '$.periodeTom',
-            ident         varchar2(255) path '$.ident',
-            vilkaar_type  varchar2(255) path '$.vilkårType'
+            resultat      VARCHAR2(255) PATH  '$.resultat',
+            antall_timer  NUMBER(10,2)  PATH  '$.antallTimer',
+            periode_fom   DATE PATH  '$.periodeFom',
+            periode_tom   DATE PATH  '$.periodeTom',
+            ident         VARCHAR2(255) PATH  '$.ident',
+            vilkaar_type  VARCHAR2(255) PATH  '$.vilkårType'
             )
           )
         ) j
   )
   where vilkaar_type is not null
-  --where json_value (melding, '$.vilkårResultater.size()' )> 0
-  --where json_exists(melding, '$.vilkårResultater.vilkårType')
 ),
 
 final as (
   select
-    to_number(pre_final.behandlings_id) as fk_ks_fagsak,
+    behandlings_id as fk_ks_fagsak,
     resultat,
     ident,
-    --replace(antall_timer, '.', ',') antall_timer,
     antall_timer,
-    to_date(periode_fom, 'yyyy-mm-dd') periode_fom,
-    to_date(periode_tom, 'yyyy-mm-dd') periode_tom,
+    periode_fom,
+    periode_tom,
     nvl(b.fk_person1, -1) fk_person1,
     vilkaar_type
   from pre_final
-  left outer join dt_person.ident_off_id_til_fk_person1 b
+  left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b
   on pre_final.ident = b.off_id
   and pre_final.kafka_mottatt_dato between b.gyldig_fra_dato and b.gyldig_til_dato
   and b.skjermet_kode = 0
