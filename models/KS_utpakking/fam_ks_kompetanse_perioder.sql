@@ -32,8 +32,8 @@ select * from kontanststotte_meta_data,
 final as (
   select
   behandlings_id as fk_ks_fagsak,
-  TO_CHAR(TO_DATE(fom, 'YYYY-MM'), 'YYYYMM'),
-  TO_CHAR(TO_DATE(tom, 'YYYY-MM'), 'YYYYMM'),
+  TO_CHAR(TO_DATE(fom, 'YYYY-MM'), 'YYYYMM')  fom,
+  TO_CHAR(TO_DATE(tom, 'YYYY-MM'), 'YYYYMM')  tom,
   kompetanse_aktivitet,
   kompetanse_Resultat,
   barnets_bostedsland,
