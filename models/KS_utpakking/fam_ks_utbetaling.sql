@@ -18,13 +18,13 @@ pre_final as (
   (select *  from ks_meta_data,
     json_table(melding, '$'
       columns(
-          behandlings_id  NUMBER(38,0) PATH  '$.behandlingsId',
+          behandlings_id   PATH  '$.behandlingsId',
             nested path '$.utbetalingsperioder[*]'
             columns(
               hjemmel VARCHAR2(255) PATH '$.hjemmel',
               utbetalt_per_mnd NUMBER(16,2) PATH '$.utbetaltPerMnd',
-              stonad_fom   DATE PATH '$.stønadFom',
-              stonad_tom   DATE PATH  '$.stønadTom'
+              stonad_fom    PATH '$.stønadFom',
+              stonad_tom    PATH  '$.stønadTom'
           )
         )
       ) j
@@ -38,8 +38,8 @@ select
   kafka_offset,
   hjemmel,
   utbetalt_per_mnd,
-  stonad_fom,
-  stonad_tom,
+  to_date(stonad_fom, 'yyyy-mm-dd') stonad_fom,
+  to_date(stonad_tom,'yyyy-mm-dd') stonad_tom,
   sysdate lastet_dato,
   behandlings_id as fk_ks_fagsak
 from pre_final

@@ -41,8 +41,8 @@ joining_pre_final as (
   select
     personidentbarn,
     nvl(b.fk_person1, -1) fk_person1,
-    tom,
-    fom,
+    TO_CHAR(TO_DATE(fom, 'YYYY-MM'), 'YYYYMM')  fom,
+    TO_CHAR(TO_DATE(tom, 'YYYY-MM'), 'YYYYMM')  tom,
     kompetanse_Resultat,
     sokersAktivitetsland,
     annenForeldersAktivitet,

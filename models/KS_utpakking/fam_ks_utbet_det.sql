@@ -18,29 +18,25 @@ pre_final as (
     select *  from ks_meta_data,
       json_table(melding, '$'
         columns(
-          behandlings_id  NUMBER(38,0) PATH  '$.behandlingsId',
+          behandlings_id  PATH  '$.behandlingsId',
             nested path '$.utbetalingsperioder[*]'
             columns(
-              stonad_fom    DATE  PATH '$.stønadFom',
-              stonad_tom    DATE  PATH '$.stønadTom',
+              stonad_fom     PATH '$.stønadFom',
+              stonad_tom     PATH '$.stønadTom',
               nested path '$.utbetalingsDetaljer[*]'
               columns(
                 klassekode VARCHAR2(255) PATH  '$.klassekode',
                 utbetalt_per_mnd NUMBER(16,2) PATH '$.utbetaltPrMnd',
-                delytelse_id     NUMBER(16,2) PATH '$.delytelseId',
+                delytelse_id     PATH '$.delytelseId',
                 nested path '$.person'
                   columns(
                     person_ident VARCHAR2(255) PATH  '$.personIdent'
-                    --rolle path '$.rolle',
-                    --bosteds_land path '$.bostedsland',
-                    --delingsprosent_ytelse path '$.delingsprosentYtelse'
                     )
                 ))
           )
       ) j
   )
   where delytelse_id is not null
---where json_exists(melding, '$.utbetalingsperioder.utbetalingsDetaljer.delytelseId')
 ),
 
 final as (
@@ -52,11 +48,8 @@ utbetalt_per_mnd,
 delytelse_id,
 person_ident,
 nvl(b.fk_person1, -1) fk_person1_barn,
---rolle,
-stonad_fom,
-stonad_tom,
---bosteds_land,
---delingsprosent_ytelse,
+to_date(stonad_fom, 'yyyy-mm-dd') stonad_fom,
+to_date(stonad_tom,'yyyy-mm-dd') stonad_tom,
 kafka_mottatt_dato,
 sysdate lastet_dato,
 to_number(replace(behandlings_id || stonad_fom || stonad_tom, '-', '')) as fk_ks_utbetaling
@@ -72,9 +65,7 @@ left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b on
 select
   pk_ks_utbet_det,
   kafka_offset,
-  --hjemmel,
   utbetalt_per_mnd,
-  --kafka_mottatt_dato,
   lastet_dato,
   delytelse_id,
   fk_person1_barn,
