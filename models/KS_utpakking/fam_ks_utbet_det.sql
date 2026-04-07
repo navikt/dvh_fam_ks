@@ -9,7 +9,8 @@ with ks_meta_data as (
 ),
 
 ks_utbetaling as (
-  select * from {{ref('fam_ks_utbetaling')}}
+  select pk_ks_utbetaling, stonad_fom, stonad_tom, kafka_offset 
+  from {{ref('fam_ks_utbetaling')}}
 ),
 
 pre_final as (
@@ -55,7 +56,7 @@ sysdate lastet_dato
 from
   pre_final 
 left outer join dt_person.ident_off_id_til_fk_person1 b on
-  person_ident=b.off_id
+  person_ident = b.off_id
   and b.gyldig_fra_dato <= kafka_mottatt_dato
   and b.gyldig_til_dato >= kafka_mottatt_dato
   and b.skjermet_kode = 0
