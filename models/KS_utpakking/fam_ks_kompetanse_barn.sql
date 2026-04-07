@@ -4,7 +4,7 @@
     )
 }}
 
-with kontanststotte_meta_data as (
+with ks_meta_data as (
   select * from {{ref ('ks_meldinger_til_aa_pakke_ut')}}
 ),
 
@@ -13,7 +13,7 @@ ks_komp_per AS (
 ),
 
 pre_final as (
-select * from kontanststotte_meta_data,
+select * from ks_meta_data,
   json_table(melding, '$'
     COLUMNS (
         nested path '$.kompetanseperioder[*]'
@@ -71,7 +71,8 @@ final as (
     k.pK_ks_KOMPETANSE_PERIODER as fK_ks_KOMPETANSE_PERIODER
   from joining_pre_final j
   join ks_komp_per k
-  on COALESCE(j.fom,'-1') = COALESCE(k.fom,'-1') and COALESCE(j.tom,'-1') = COALESCE(k.tom,'-1')
+  on COALESCE(j.fom,'-1') = COALESCE(k.fom,'-1') 
+  and COALESCE(j.tom,'-1') = COALESCE(k.tom,'-1')
   and COALESCE(j.kompetanse_Resultat,'-1') = COALESCE(k.kompetanse_Resultat,'-1')
   and COALESCE(j.barnets_bostedsland,'-1') = COALESCE(k.barnets_bostedsland,'-1')
   and COALESCE(j.sokersAktivitetsland,'-1') = COALESCE(k.SOKERS_AKTIVITETSLAND,'-1')

@@ -9,7 +9,8 @@ with ks_meta_data as (
 ),
 
 ks_fagsak as (
-  select * from {{ref('fam_ks_fagsak')}}
+    select behandlings_id, pk_ks_fagsak, kafka_offset
+    from {{ref ('fam_ks_fagsak')}}
 ),
 
 pre_final as (
@@ -34,15 +35,18 @@ pre_final as (
 
 final as (
 select
-  to_number(replace(behandlings_id || stonad_fom || stonad_tom, '-', '')) as pk_ks_utbetaling,
-  kafka_offset,
+  to_number(replace(pre_final.behandlings_id || stonad_fom || stonad_tom, '-', '')) as pk_ks_utbetaling,
+  pre_final.kafka_offset,
   hjemmel,
   utbetalt_per_mnd,
   to_date(stonad_fom, 'yyyy-mm-dd') stonad_fom,
   to_date(stonad_tom,'yyyy-mm-dd') stonad_tom,
   sysdate lastet_dato,
-  behandlings_id as fk_ks_fagsak
+  ks_fagsak.pk_ks_fagsak as fk_ks_fagsak
 from pre_final
+join ks_fagsak
+  on pre_final.kafka_offset = ks_fagsak.kafka_offset
+  and pre_final.behandlings_id = ks_fagsak.behandlings_id
 )
 
 select * from final

@@ -4,12 +4,17 @@
     )
 }}
 
-with kontanststotte_meta_data as (
+with ks_meta_data as (
   select * from {{ref ('ks_meldinger_til_aa_pakke_ut')}}
 ),
 
+ks_fagsak as (
+    select behandlings_id, pk_ks_fagsak, kafka_offset
+    from {{ref ('fam_ks_fagsak')}}
+),
+
 pre_final as (
-select * from kontanststotte_meta_data,
+select * from ks_meta_data,
   json_table(melding, '$'
     COLUMNS (
       behandlings_id      NUMBER(38,0) PATH '$.behandlingsId',
@@ -31,13 +36,13 @@ select * from kontanststotte_meta_data,
 
 final as (
   select
-  behandlings_id as fk_ks_fagsak,
+  ks_fagsak.pk_ks_fagsak as fk_ks_fagsak,
   TO_CHAR(TO_DATE(fom, 'YYYY-MM'), 'YYYYMM')  fom,
   TO_CHAR(TO_DATE(tom, 'YYYY-MM'), 'YYYYMM')  tom,
   kompetanse_aktivitet,
   kompetanse_Resultat,
   barnets_bostedsland,
-  kafka_offset,
+  pre_final.kafka_offset,
   SOKERS_AKTIVITETSLAND,
   ANNEN_FORELDERS_AKTIVITET,
   ANNEN_FORELDERS_AKTIVITETSLAND,
@@ -46,6 +51,9 @@ final as (
     ELSE 1
   END ANNEN_FORELDER_OMFATTET_AV_NORSK_LOVGIVNING
   from pre_final
+  join ks_fagsak
+  on pre_final.kafka_offset = ks_fagsak.kafka_offset
+  and pre_final.behandlings_id = ks_fagsak.behandlings_id
 )
 
 select

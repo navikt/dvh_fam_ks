@@ -9,7 +9,8 @@ with ks_meta_data as (
 ),
 
 ks_fagsak as (
-  select * from {{ref('fam_ks_fagsak')}}
+  select behandlings_id, pk_ks_fagsak, kafka_offset
+  from {{ref('fam_ks_fagsak')}}
 ),
 
 pre_final as (
@@ -36,12 +37,13 @@ pre_final as (
 
 final as (
   select
-    behandlings_id as fk_ks_fagsak,
+    behandlings_id,
     resultat,
     ident,
     antall_timer,
     periode_fom,
     periode_tom,
+    kafka_offset,
     nvl(b.fk_person1, -1) fk_person1,
     vilkaar_type
   from pre_final
@@ -62,6 +64,9 @@ select
   end ident,
   fk_person1,
   vilkaar_type,
-  localtimestamp AS lastet_dato,
-  fk_ks_fagsak
-from final
+  localtimestamp as lastet_dato,
+  k.pk_ks_fagsak as fk_ks_fagsak
+from final f
+join ks_fagsak k
+  on f.kafka_offset = k.kafka_offset
+  and f.behandlings_id = k.behandlings_id
