@@ -14,3 +14,4 @@ dvh_fam_ks:
       user: "{{env_var('DBT_ENV_SECRET_USER')}}"
 config:
   send_anonymous_usage_stats: False
+  
