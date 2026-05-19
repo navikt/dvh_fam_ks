@@ -15,5 +15,95 @@ sources:
         description: 'inneholder vedtaks data for kontantstøtte'
 
 
+models:
+
+  # 🔷 Parent model
+  - name: fam_ks_fagsak_test
+    columns:
+      - name: PK_KS_FAGSAK
+        tests:
+          - not_null
+          - unique
+
+  # 🔷 Child model
+  - name: fam_ks_vilkaar_resultat_test
+    columns:
+
+      # ✅ Child primary key
+      - name: PK_KS_VILKAAR_RESULTAT
+        tests:
+          - not_null
+          - unique
+
+      # ✅ Foreign key
+      - name: FK_KS_FAGSAK
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fam_ks_fagsak_test')
+              field: PK_KS_FAGSAK
+
+  # 🔷 Child og Parent model
+  - name: fam_ks_kompetanse_perioder_test
+    columns:
+      - name: PK_KS_KOMPETANSE_PERIODER
+        tests:
+          - not_null
+          - unique
+      - name: FK_KS_FAGSAK
+        tests:
+          - not_null
+
+          # ✅ THIS IS THE FOREIGN KEY
+          - relationships:
+              to: ref('fam_ks_fagsak_test')
+              field: PK_KS_FAGSAK
+            
+  - name: fam_ks_kompetanse_barn_test
+    columns:
+      - name: PK_KS_KOMPETANSE_BARN  
+        tests:
+          - not_null
+          - unique    
+      - name: FK_KS_KOMPETANSE_PERIODER
+        tests:
+          - not_null
+
+          # ✅ THIS IS THE FOREIGN KEY
+          - relationships:
+              to: ref('fam_ks_kompetanse_perioder_test')
+              field: PK_KS_KOMPETANSE_PERIODER
+
+  - name: fam_ks_utbetaling_test
+    columns:
+      - name: PK_KS_UTBETALING 
+        tests:
+          - not_null
+          - unique
+      - name: FK_KS_FAGSAK
+        tests:
+          - not_null
+
+          # ✅ THIS IS THE FOREIGN KEY
+          - relationships:
+              to: ref('fam_ks_fagsak_test')
+              field: PK_KS_FAGSAK
+
+  - name: fam_ks_utbet_det_test
+    columns:
+      - name: PK_KS_UTBET_DET
+        tests:
+          - not_null
+          - unique    
+      - name: FK_KS_UTBETALING
+        tests:
+          - not_null
+
+          # ✅ THIS IS THE FOREIGN KEY
+          - relationships:
+              to: ref('fam_ks_utbetaling_test')
+              field: PK_KS_UTBETALING
+
+
 
 
