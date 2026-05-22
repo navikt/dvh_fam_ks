@@ -19,9 +19,9 @@ select
     rolle,
     bosteds_land,
     delingsprosent_ytelse,
-    localtimestamp lastet_dato,
     kafka_mottatt_dato,
-    fk_ks_meta_data
+    fk_ks_meta_data,
+    localtimestamp as lastet_dato
 from {{ ref ('int_ks_fagsak') }}
 
 {% if is_incremental() %}

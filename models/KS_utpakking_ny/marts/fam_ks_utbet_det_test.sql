@@ -9,11 +9,11 @@ select
     ,pk_ks_utbet_det_ny
     ,kafka_offset
     ,utbetalt_per_mnd
-    ,localtimestamp lastet_dato
     ,delytelse_id
     ,fk_person1_barn
     ,fk_ks_utbetaling
     ,klassekode
+    ,localtimestamp as lastet_dato
 from {{ref ('int_ks_utbet_det')}}
 
 {% if is_incremental() %}

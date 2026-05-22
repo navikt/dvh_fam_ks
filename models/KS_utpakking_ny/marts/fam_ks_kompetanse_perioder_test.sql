@@ -16,7 +16,7 @@ select
     ,BARNETS_BOSTEDSLAND
     ,kompetanse_Resultat
     ,ANNEN_FORELDER_OMFATTET_AV_NORSK_LOVGIVNING
-    ,localtimestamp lastet_dato
+    ,localtimestamp as lastet_dato
     ,kafka_offset
 from {{ref ('int_ks_kompetanse_perioder')}}
 

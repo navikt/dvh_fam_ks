@@ -11,9 +11,9 @@ select
     ,utbetalt_per_mnd
     ,stonad_fom
     ,stonad_tom
-    ,localtimestamp lastet_dato
     ,fk_ks_fagsak
     ,kafka_offset
+    ,localtimestamp as lastet_dato
 from {{ref ('int_ks_utbetaling')}}
 
 {% if is_incremental() %}
