@@ -59,9 +59,11 @@ select
   antall_timer,
   periode_fom,
   periode_tom,
+  /*
   case when fk_person1 = -1 then ident
        else cast(null as varchar2(11))
   end ident,
+  */
   fk_person1,
   vilkaar_type,
   localtimestamp as lastet_dato,
