@@ -18,7 +18,7 @@ sources:
 models:
 
   # 🔷 Parent model
-  - name: fam_ks_fagsak_test
+  - name: fam_ks_fagsak
     columns:
       - name: PK_KS_FAGSAK
         tests:
@@ -26,7 +26,7 @@ models:
           - unique
 
   # 🔷 Child model
-  - name: fam_ks_vilkaar_resultat_test
+  - name: fam_ks_vilkaar_resultat
     columns:
 
       # ✅ Child primary key
@@ -40,11 +40,11 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('fam_ks_fagsak_test')
+              to: ref('fam_ks_fagsak')
               field: PK_KS_FAGSAK
 
   # 🔷 Child og Parent model
-  - name: fam_ks_kompetanse_perioder_test
+  - name: fam_ks_kompetanse_perioder
     columns:
       - name: PK_KS_KOMPETANSE_PERIODER
         tests:
@@ -56,10 +56,10 @@ models:
 
           # ✅ THIS IS THE FOREIGN KEY
           - relationships:
-              to: ref('fam_ks_fagsak_test')
+              to: ref('fam_ks_fagsak')
               field: PK_KS_FAGSAK
             
-  - name: fam_ks_kompetanse_barn_test
+  - name: fam_ks_kompetanse_barn
     columns:
       - name: PK_KS_KOMPETANSE_BARN  
         tests:
@@ -71,10 +71,10 @@ models:
 
           # ✅ THIS IS THE FOREIGN KEY
           - relationships:
-              to: ref('fam_ks_kompetanse_perioder_test')
+              to: ref('fam_ks_kompetanse_perioder')
               field: PK_KS_KOMPETANSE_PERIODER
 
-  - name: fam_ks_utbetaling_test
+  - name: fam_ks_utbetaling
     columns:
       - name: PK_KS_UTBETALING 
         tests:
@@ -86,10 +86,10 @@ models:
 
           # ✅ THIS IS THE FOREIGN KEY
           - relationships:
-              to: ref('fam_ks_fagsak_test')
+              to: ref('fam_ks_fagsak')
               field: PK_KS_FAGSAK
 
-  - name: fam_ks_utbet_det_test
+  - name: fam_ks_utbet_det
     columns:
       - name: PK_KS_UTBET_DET
         tests:
@@ -101,7 +101,7 @@ models:
 
           # ✅ THIS IS THE FOREIGN KEY
           - relationships:
-              to: ref('fam_ks_utbetaling_test')
+              to: ref('fam_ks_utbetaling')
               field: PK_KS_UTBETALING
 
 
