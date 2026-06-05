@@ -12,8 +12,8 @@ pre_final as (
     select
         --to_number(replace(behandlings_id || stonad_fom || stonad_tom || delytelse_ID, '-', '')) as pk_ks_utbet_det,    TO_CHAR(stonad_fom, 'YYYYMMDD')
         --to_number(replace(behandlings_id || kafka_offset || TO_CHAR(stonad_fom, 'YYYYMMDD') || TO_CHAR(stonad_tom, 'YYYYMMDD') || delytelse_ID, '-', '')) as pk_ks_utbet_det,
-        to_number(replace(behandlings_id || TO_CHAR(stonad_fom, 'YYYYMMDD') || TO_CHAR(stonad_tom, 'YYYYMMDD') || delytelse_ID, '-', '')) as pk_ks_utbet_det,
-        {{ dbt_utils.generate_surrogate_key(['behandlings_id', 'kafka_offset', 'stonad_fom', 'stonad_tom', 'delytelse_ID']) }}  as pk_ks_utbet_det_ny,
+        --to_number(replace(behandlings_id || TO_CHAR(stonad_fom, 'YYYYMMDD') || TO_CHAR(stonad_tom, 'YYYYMMDD') || delytelse_ID, '-', '')) as pk_ks_utbet_det,
+        {{ dbt_utils.generate_surrogate_key(['behandlings_id', 'kafka_offset', 'stonad_fom', 'stonad_tom', 'delytelse_ID']) }}  as pk_ks_utbet_det,
         --STANDARD_HASH(behandlings_id || kafka_offset || NVL(TO_CHAR(stonad_fom, 'YYYYMMDD'), 'x') || NVL(TO_CHAR(stonad_tom, 'YYYYMMDD'), 'x') || NVL(TO_CHAR(delytelse_ID), 'x'), 'MD5') as pk_ks_utbet_det_ny,
         kafka_offset,
         klassekode,
@@ -34,13 +34,11 @@ pre_final as (
 
 select
     pk_ks_utbet_det,
-    pk_ks_utbet_det_ny,
     p.kafka_offset,
     p.utbetalt_per_mnd,
     p.delytelse_id,
     p.fk_person1_barn,
     u.pk_ks_utbetaling as fk_ks_utbetaling,
-    u.pk_ks_utbetaling_ny as fk_ks_utbetaling_ny,
     p.klassekode
 from pre_final p
 join utbetaling u

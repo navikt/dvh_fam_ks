@@ -6,7 +6,6 @@
 
 select 
     pk_ks_utbetaling
-    ,pk_ks_utbetaling_ny
     ,hjemmel
     ,utbetalt_per_mnd
     ,stonad_fom
