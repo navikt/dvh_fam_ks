@@ -6,7 +6,6 @@
 
 select
     pk_ks_utbet_det
-    ,pk_ks_utbet_det_ny
     ,kafka_offset
     ,utbetalt_per_mnd
     ,delytelse_id
