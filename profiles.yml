@@ -6,12 +6,11 @@ dvh_fam_ks:
       password: placeholder      
       port: "{{env_var('DBT_DB_PORT')}}"      
       protocol: tcp      
-      schema: dvh_fam_ungdom      
+      schema: dvh_fam_ks      
       service: "{{env_var('DBT_ENV_SERVICE')}}"      
       database: "{{env_var('DBT_DB_NAME')}}"      
       threads: 8    
       type: oracle      
       user: "{{env_var('DBT_ENV_SECRET_USER')}}"
-config:
-  send_anonymous_usage_stats: False
+
   
