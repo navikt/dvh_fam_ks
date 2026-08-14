@@ -11,9 +11,6 @@ sources:
     tables:
       - name: fam_ks_meta_data
         description: 'inneholder meta_data for kontantstøtte'
-      - name: fam_ks_fagsak
-        description: 'inneholder vedtaks data for kontantstøtte'
-
 
 models:
 
