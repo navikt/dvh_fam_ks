@@ -5,15 +5,26 @@ sources:
     schema: dt_person
     tables:
       - name: ident_off_id_til_fk_person1
+      - name: dim_person
+
+  - name: kode_verk
+    schema: 
+    tables:
+      - name: dim_tid_mnd
+      - name: dim_tid
 
   - name: fam_ks
     schema: dvh_fam_ks
     tables:
       - name: fam_ks_meta_data
         description: 'inneholder meta_data for kontantstøtte'
+      - name: fam_ks_utbet_det
+      - name: fam_ks_utbetaling
+      - name: fam_ks_fagsak
+      - name: vfam_ks_fagsak_siste
+      - name: fam_ks_kompetanse_perioder
 
 models:
-
   # 🔷 Parent model
   - name: fam_ks_fagsak
     columns:
@@ -100,7 +111,3 @@ models:
           - relationships:
               to: ref('fam_ks_utbetaling')
               field: PK_KS_UTBETALING
-
-
-
-
