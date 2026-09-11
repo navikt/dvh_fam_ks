@@ -14,7 +14,7 @@ with fag as (
         ,t1.tidspunkt_vedtak as vedtakstidspunkt
         ,t1.fk_person1_mottaker
         ,t1.behandlings_id 
-        from fam_ks_fagsak t1
+        from  {{ ref('fam_ks_fagsak') }} t1
 ),
 
 /* 
