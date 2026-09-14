@@ -1,0 +1,19 @@
+stg_fam_ks_utbet_det
+        +
+stg_fam_ks_utbetaling
+        ↓
+int_ks_join_utbetaling
+        ↓
+int_ks_join_fagsak_siste
+        ↓
+int_ks_join_fagsak
+        ↓
+int_ks_join_dim_tid
+        ↓
+int_ks_join_mottaker
+        ↓
+int_ks_join_barn
+        ↓
+int_ks_join_kompetanse
+        ↓
+mart_fak_ks_barn_vedtak
