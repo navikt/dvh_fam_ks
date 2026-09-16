@@ -29,7 +29,7 @@ with dim_tid_mnd as (
 )
 
 select *
-from dim_tid
+from dim_tid_mnd
 
 /*
 JOIN  DT_KODEVERK.DIM_TID DIM_TID_MND ON
