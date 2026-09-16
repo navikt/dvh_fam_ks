@@ -8,7 +8,7 @@ sources:
       - name: dim_person
 
   - name: kode_verk
-    schema: 
+    schema: dt_kodeverk
     tables:
       - name: dim_tid_mnd
       - name: dim_tid
