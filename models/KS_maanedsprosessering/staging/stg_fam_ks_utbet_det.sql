@@ -1,4 +1,4 @@
-with fam_ks_utbet_det as (
+with stg_fam_ks_utbet_det as (
 
     select
         fk_ks_utbetaling
@@ -11,4 +11,4 @@ with fam_ks_utbet_det as (
 )
 
 select *
-from fam_ks_utbet_det
+from stg_fam_ks_utbet_det

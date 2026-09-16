@@ -1,4 +1,4 @@
-with fam_ks_fagsak as (
+with stg_fam_ks_fagsak as (
 
     select
         pk_ks_fagsak
@@ -11,4 +11,4 @@ with fam_ks_fagsak as (
 )
 
 select *
-from fam_ks_fagsak
+from stg_fam_ks_fagsak

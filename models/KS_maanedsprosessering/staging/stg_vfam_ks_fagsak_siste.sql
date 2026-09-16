@@ -1,4 +1,4 @@
-with vfam_ks_fagsak_siste as (
+with stg_vfam_ks_fagsak_siste as (
 
     select *
 
@@ -7,5 +7,5 @@ with vfam_ks_fagsak_siste as (
 )
 
 select *
-from vfam_ks_fagsak_siste
+from stg_vfam_ks_fagsak_siste
 -- Denne modellen tilfører ingen nye kolonner, men speiler originalviewets join-rekkefølge. Dette er kun for økt lesbarhet.

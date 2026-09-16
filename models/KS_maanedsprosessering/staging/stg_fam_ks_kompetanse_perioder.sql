@@ -1,4 +1,4 @@
-with fam_ks_kompetanse_perioder as (
+with stg_fam_ks_kompetanse_perioder as (
 
     select
         fk_ks_fagsak
@@ -12,4 +12,4 @@ with fam_ks_kompetanse_perioder as (
 )
 
 select *
-from fam_ks_kompetanse_perioder
+from stg_fam_ks_kompetanse_perioder

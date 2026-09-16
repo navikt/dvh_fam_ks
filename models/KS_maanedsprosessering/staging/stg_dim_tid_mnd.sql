@@ -1,4 +1,4 @@
-with dim_tid_mnd as (
+with stg_dim_tid_mnd as (
 
     select
         dim_nivaa
@@ -11,4 +11,4 @@ with dim_tid_mnd as (
 )
 
 select *
-from dim_tid_mnd
+from stg_dim_tid_mnd

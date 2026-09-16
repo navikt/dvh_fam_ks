@@ -1,4 +1,4 @@
-with dim_person as (
+with stg_dim_person as (
 
     select
         fk_person1
