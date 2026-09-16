@@ -11,6 +11,6 @@ with stg_dim_person as (
 )
 
 select *
-from dim_person
+from stg_dim_person
 
 --brukes flere ganger, løses med aliasering
