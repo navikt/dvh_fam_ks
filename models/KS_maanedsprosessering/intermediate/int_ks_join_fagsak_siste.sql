@@ -11,6 +11,7 @@ with fagsak_siste as (
         ,SISTE.STONAD_TOM
 
         ,FAGSAK_SISTE.PK_KS_FAGSAK -- Denne modellen tilfører ingen nye kolonner, men speiler originalviewets join-rekkefølge. Dette er for økt lesbarhet.
+        ,FAGSAK_SISTE.fagsak_id
 
     from {{ ref('int_ks_join_utbetaling') }} SISTE
 

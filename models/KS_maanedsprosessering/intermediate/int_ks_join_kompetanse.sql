@@ -28,7 +28,7 @@ with kompetanse as (
     from {{ ref('int_ks_join_barn') }} SISTE
 
     left join {{ ref('stg_fam_ks_kompetanse_perioder') }} KOMP_PER
-        on SISTE.FK_KS_FAGSAK = KOMP_PER.FK_KS_FAGSAK
+        on SISTE.PK_KS_FAGSAK = KOMP_PER.FK_KS_FAGSAK --
        and SISTE.AAR_MAANED >= to_char(
             to_date(KOMP_PER.FOM, 'YYYY-MM')
            ,'YYYYMM'
@@ -39,6 +39,24 @@ with kompetanse as (
        )
        and KOMP_PER.FOM is not null
 
+    group by
+        SISTE.FK_KS_UTBETALING
+        ,SISTE.FK_PERSON1_BARN
+        ,SISTE.KLASSEKODE
+        ,SISTE.UTBETALT_PER_MND
+        ,SISTE.FK_KS_FAGSAK
+        ,SISTE.STONAD_FOM
+        ,SISTE.STONAD_TOM
+        ,SISTE.PK_KS_FAGSAK
+        ,SISTE.FAGSAK_ID
+        ,SISTE.FK_PERSON1_MOTTAKER
+        ,SISTE.BEHANDLING_AARSAK
+        ,SISTE.AAR_MAANED
+        ,SISTE.SISTE_DATO_I_PERIODEN
+        ,SISTE.MOTTAKER_FODT_DATO
+        ,SISTE.BARN_FODT_DATO
+        ,KOMP_PER.KOMPETANSE_RESULTAT
+        ,KOMP_PER.KOMPETANSE_AKTIVITET
 )
 
 select *

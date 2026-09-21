@@ -18,9 +18,14 @@ with fagsak as (
     from {{ ref('int_ks_join_fagsak_siste') }} SISTE
 
     inner join {{ ref('stg_fam_ks_fagsak') }} FAGSAK
-        on SISTE.FK_KS_FAGSAK = FAGSAK.PK_KS_FAGSAK --
+        on SISTE.PK_KS_FAGSAK = FAGSAK.PK_KS_FAGSAK --
 
 )
 
 select *
 from fagsak
+
+/*
+JOIN FAM_KS_FAGSAK FAGSAK ON
+FAGSAK.PK_KS_FAGSAK=FAGSAK_SISTE.PK_KS_FAGSAK
+*/

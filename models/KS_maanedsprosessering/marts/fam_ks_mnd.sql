@@ -28,22 +28,6 @@ with fact as (
 
     from {{ ref('int_ks_join_kompetanse') }} SISTE
 
-    group by
-        SISTE.AAR_MAANED
-        ,SISTE.FAGSAK_ID
-        ,SISTE.FK_PERSON1_MOTTAKER
-        ,to_char(SISTE.MOTTAKER_FODT_DATO, 'YYYY')
-        ,to_char(SISTE.MOTTAKER_FODT_DATO, 'MM')
-        ,SISTE.BEHANDLING_AARSAK
-        ,SISTE.FK_PERSON1_BARN
-        ,to_char(SISTE.BARN_FODT_DATO, 'YYYY')
-        ,to_char(SISTE.BARN_FODT_DATO, 'MM')
-        ,SISTE.KLASSEKODE
-        ,SISTE.STONAD_FOM
-        ,SISTE.STONAD_TOM
-        ,SISTE.UTBETALT_PER_MND
-        ,SISTE.KOMPETANSE_RESULTAT
-        ,SISTE.KOMPETANSE_AKTIVITET
 )
 
 select

@@ -8,7 +8,7 @@ int_ks_join_fagsak_siste
         ↓
 int_ks_join_fagsak
         ↓
-int_ks_join_dim_tid
+int_ks_join_dim_tid_mnd
         ↓
 int_ks_join_mottaker
         ↓
