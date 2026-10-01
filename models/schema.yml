@@ -12,6 +12,7 @@ sources:
     tables:
       - name: fam_ks_meta_data
         description: 'inneholder meta_data for kontantstøtte'
+      - name: FAK_KS_MOTTAKER
 
   - name: kode_verk
     schema: dt_kodeverk
@@ -20,6 +21,7 @@ sources:
       - name: dim_tid
       - name: dim_geografi
       - name: dim_kjonn
+
 
       
 
