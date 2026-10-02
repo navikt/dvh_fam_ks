@@ -25,6 +25,16 @@ sources:
 
       
 
+  - name: kode_verk
+    schema: dt_kodeverk
+    tables:
+      - name: dim_alder
+      - name: dim_tid
+      - name: dim_geografi
+      - name: dim_kjonn
+
+      
+
 models:
 
   # 🔷 Parent model
