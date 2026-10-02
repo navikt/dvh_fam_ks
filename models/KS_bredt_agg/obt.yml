@@ -3,3 +3,12 @@ models:
     columns:
       - name: lastet_dato
         description:  '{{ doc("lastet_dato") }}'
+
+  - name: obt_kontantstotte_kvartal        
+    columns:
+      - name: lastet_dato
+        description:  '{{ doc("lastet_dato") }}'
+      - name: KONTANTSTOTTE_ANTALL_MOTTAKERE
+
+
+      
