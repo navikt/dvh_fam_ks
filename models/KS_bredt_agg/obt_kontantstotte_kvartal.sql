@@ -8,16 +8,16 @@
 }}
 
     with mot as (
-    select FK_DIM_TID_MND as fk_dim_tid
+    select fk_dim_tid
     ,FK_DIM_GEOGRAFI_BOSTED
     ,FK_DIM_ALDER
     ,FK_DIM_KJONN
     ,count(distinct FK_PERSON1_MOTTAKER) as kontantstotte_antall_mottakere
-    from {{ source ('fam_ks', 'FAK_KS_MOTTAKER') }} t1
+    from {{ ref('v_ks_mottakere') }} t1
     left join {{ source ('kode_verk', 'dim_tid') }} t2
-    on t1.FK_DIM_TID_MND = t2.PK_DIM_TID
+    on t1.fk_dim_tid = t2.PK_DIM_TID
     where t2.maaned in (3,6,9,12)
-    group by FK_DIM_TID_MND
+    group by fk_dim_tid
     ,FK_DIM_GEOGRAFI_BOSTED
     ,FK_DIM_ALDER
     ,FK_DIM_KJONN

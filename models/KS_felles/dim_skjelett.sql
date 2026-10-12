@@ -43,6 +43,7 @@ CROSS JOIN {{ source ('kode_verk', 'dim_alder') }} t4
 where t1.gyldig_flagg = 1
 and t2.gyldig_flagg = 1
 and t3.gyldig_flagg = 1
+and t3.dim_nivaa = 1  
 and t4.gyldig_flagg = 1
 and  t1.dim_nivaa = 3 
 and t1.aar = '2026' 
