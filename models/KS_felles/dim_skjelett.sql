@@ -33,6 +33,7 @@ select
     ,t3.kjonn_flertall_besk
     ,t4.pk_dim_alder as fk_dim_alder
     ,t4.alder
+    ,t4.alder_gruppe1_besk
     ,t4.ti_aar_gruppe_besk
     ,t4.alder_gruppe5_besk
     ,t4.alder_gruppe7_besk

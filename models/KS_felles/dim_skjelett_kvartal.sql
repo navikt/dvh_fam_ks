@@ -23,6 +23,7 @@ select
     ,t3.kjonn_flertall_besk
     ,t4.pk_dim_alder as fk_dim_alder
     ,t4.alder
+    ,t4.alder_gruppe1_besk
     ,t4.ti_aar_gruppe_besk
     ,t4.alder_gruppe5_besk
     ,t4.alder_gruppe7_besk
@@ -36,4 +37,4 @@ and t3.gyldig_flagg = 1
 and t3.dim_nivaa = 1  
 and t4.gyldig_flagg = 1
 and  t1.dim_nivaa = 3
-and t1.aar = '2026' 
+and t1.aar >= '2018'and t1.aar <= TO_CHAR(SYSDATE, 'YYYY')
