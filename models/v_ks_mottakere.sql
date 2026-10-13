@@ -7,6 +7,7 @@ with ks_infotrygd as (
   from  {{ source ('fam_ks', 'fak_ks_mottaker_infotrygd') }}
   where FK_DIM_TID_MND is not null 
   and FK_DIM_ALDER is not null
+  and belopm > 0
 ),
 
 ks as (
@@ -16,6 +17,7 @@ ks as (
     ,FK_DIM_KJONN
     ,FK_PERSON1_MOTTAKER
   from  {{ source ('fam_ks', 'FAK_KS_MOTTAKER') }}
+  where belopm > 0
 ),
 
 final as (
