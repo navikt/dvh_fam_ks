@@ -22,9 +22,10 @@ final as (
         vilkaar_type
     from vilkaar_resultat v
     left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b
-    on v.ident = b.off_id
-    and v.kafka_mottatt_dato between b.gyldig_fra_dato and b.gyldig_til_dato
-    and b.skjermet_kode = 0
+        on v.ident = b.off_id
+        and TRUNC(v.tidspunkt_vedtak, 'DD') >= b.gyldig_fra_dato
+        and TRUNC(v.tidspunkt_vedtak, 'DD') <= b.gyldig_til_dato
+        and b.skjermet_kode = 0
 )
 
 select
