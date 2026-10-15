@@ -7,20 +7,21 @@ select * from ks_meta_data,
   json_table(melding, '$'
     COLUMNS (
         behandlings_id                                  NUMBER(38,0)  PATH '$.behandlingsId',
+        tidspunkt_vedtak                                TIMESTAMP(9)  PATH    '$.tidspunktVedtak',
         nested path '$.kompetanseperioder[*]'
         COLUMNS (
-            tom                                         VARCHAR2(255) PATH '$.tom'
-            ,fom                                        VARCHAR2(255) PATH '$.fom'
-            ,kompetanse_aktivitet                       VARCHAR2(255) PATH '$.kompetanseAktivitet'
-            ,kompetanse_Resultat                        VARCHAR2(255) PATH '$.resultat'
-            ,barnets_bostedsland                        VARCHAR2(255) PATH '$.barnetsBostedsland'
-            ,sokers_aktivitetsland                       VARCHAR2(255) PATH '$.sokersAktivitetsland'
-            ,annen_forelders_aktivitet                    VARCHAR2(255) PATH '$.annenForeldersAktivitet'
-            ,annen_forelders_aktivitetsland               VARCHAR2(255) PATH '$.annenForeldersAktivitetsland'
-            ,annen_forelder_omfattet_av_norsk_lovgivning     VARCHAR2(255) PATH '$.annenForelderOmfattetAvNorskLovgivning'
+            tom                                                 VARCHAR2(255) PATH '$.tom'
+            ,fom                                                VARCHAR2(255) PATH '$.fom'
+            ,kompetanse_aktivitet                               VARCHAR2(255) PATH '$.kompetanseAktivitet'
+            ,kompetanse_Resultat                                VARCHAR2(255) PATH '$.resultat'
+            ,barnets_bostedsland                                VARCHAR2(255) PATH '$.barnetsBostedsland'
+            ,sokers_aktivitetsland                              VARCHAR2(255) PATH '$.sokersAktivitetsland'
+            ,annen_forelders_aktivitet                          VARCHAR2(255) PATH '$.annenForeldersAktivitet'
+            ,annen_forelders_aktivitetsland                     VARCHAR2(255) PATH '$.annenForeldersAktivitetsland'
+            ,annen_forelder_omfattet_av_norsk_lovgivning        VARCHAR2(255) PATH '$.annenForelderOmfattetAvNorskLovgivning'
             ,nested path '$.barnsIdenter[*]'
             columns (
-                personidentbarn                         VARCHAR2(255) PATH '$[*]'
+                personidentbarn                                 VARCHAR2(255) PATH '$[*]'
                 )
             )
         )
@@ -34,6 +35,7 @@ final as (
         fom,
         tom,
         kompetanse_aktivitet,
+        tidspunkt_vedtak,
         kompetanse_Resultat,
         barnets_bostedsland,
         sokers_aktivitetsland,
