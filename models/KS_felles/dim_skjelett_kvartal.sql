@@ -32,9 +32,12 @@ CROSS JOIN  {{ source ('kode_verk', 'dim_geografi') }} t2
 CROSS JOIN {{ source ('kode_verk', 'dim_kjonn') }} t3
 CROSS JOIN {{ source ('kode_verk', 'dim_alder') }} t4
 where t1.gyldig_flagg = 1
-and t2.gyldig_flagg = 1
+and t1.dim_nivaa = 3
+and t1.maaned in (3,6,9,12)
+and t1.aar >= '2018'and t1.aar <= TO_CHAR(SYSDATE, 'YYYY')
+and t2.gyldig_flagg = 1 -- gir ingen forskjell i sum av ks mottakere for årene 2013-2025
+and t2.dim_nivaa != 1 -- Fjerner poststednivå (gammelt)
 and t3.gyldig_flagg = 1
 and t3.dim_nivaa = 1  
 and t4.gyldig_flagg = 1
-and  t1.dim_nivaa = 3
-and t1.aar >= '2018'and t1.aar <= TO_CHAR(SYSDATE, 'YYYY')
+
