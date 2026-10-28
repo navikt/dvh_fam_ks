@@ -16,4 +16,6 @@ int_ks_join_barn
         ↓
 int_ks_join_kompetanse
         ↓
+int_ks_join_vilkaar
+        ↓
 mart_fak_ks_barn_vedtak
