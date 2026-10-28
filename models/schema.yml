@@ -23,6 +23,8 @@ sources:
       - name: fam_ks_fagsak
       - name: vfam_ks_fagsak_siste
       - name: fam_ks_kompetanse_perioder
+      - name: barnehage_hjelpetabell
+      - name: fam_ks_vilkaar_resultat
 
 models:
   # 🔷 Parent model

@@ -25,8 +25,10 @@ with fact as (
         ,SISTE.UTBETALT_PER_MND
         ,SISTE.KOMPETANSE_RESULTAT
         ,SISTE.KOMPETANSE_AKTIVITET
+        ,SISTE.ANTALL_TIMER
+        ,SISTE.BARNEHAGEPLASS_PROSENT
 
-    from {{ ref('int_ks_join_kompetanse') }} SISTE
+    from {{ ref('int_ks_join_vilkaar') }} SISTE
 
 )
 
@@ -46,6 +48,8 @@ select
     ,UTBETALT_PER_MND
     ,KOMPETANSE_RESULTAT
     ,KOMPETANSE_AKTIVITET
+    ,ANTALL_TIMER
+    ,BARNEHAGEPLASS_PROSENT
 
 from fact
 -- Kunne like godt skrevet select *
