@@ -18,7 +18,7 @@ with mottaker as (
         ,SISTE.AAR_MAANED
         ,SISTE.SISTE_DATO_I_PERIODEN
 
-        ,MOTTAKER.FODT_DATO MOTTAKER_FODT_DATO -- Husk alias videre
+        ,MOTTAKER.FODT_DATO as MOTTAKER_FODT_DATO -- Husk alias videre
 
     from {{ ref('int_ks_join_dim_tid_mnd') }} SISTE
 

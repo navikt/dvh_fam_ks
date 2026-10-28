@@ -20,7 +20,7 @@ with barn as (
 
         ,SISTE.MOTTAKER_FODT_DATO
 
-        ,BARN.FODT_DATO BARN_FODT_DATO -- Husk alias videre
+        ,BARN.FODT_DATO as BARN_FODT_DATO -- Husk alias videre
 
     from {{ ref('int_ks_join_mottaker') }} SISTE
 
