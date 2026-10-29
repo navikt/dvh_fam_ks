@@ -23,11 +23,12 @@ pre_final as (
         barnets_bostedsland
     from
         kompetanse_barn k
-    left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b on
-        k.personidentbarn = b.off_id
-        and b.gyldig_fra_dato <= k.kafka_mottatt_dato
-        and b.gyldig_til_dato >= kafka_mottatt_dato
-        and b.skjermet_kode = 0 
+    left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b 
+        on k.personidentbarn = b.off_id
+        and TRUNC(k.tidspunkt_vedtak, 'DD') >= b.gyldig_fra_dato
+        and TRUNC(k.tidspunkt_vedtak, 'DD') <= b.gyldig_til_dato
+        and b.skjermet_kode = 0
+
 ),
 
 final as (

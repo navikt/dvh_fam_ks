@@ -1,0 +1,51 @@
+models:
+  - name: dim_alder
+    columns:
+      - name: fk_dim_alder
+      - name: alder
+
+
+  - name: dim_person_keys
+    columns:
+      - name: fk_person1
+      - name: fk_dim_person
+      - name: gyldig_fra_dato
+      - name: gyldig_til_dato
+      - name: fk_dim_geografi     
+      - name: fk_dim_kjonn
+
+
+  - name: dim_person_fodt
+    columns:
+      - name: fk_person1
+      - name: fodt_dato
+      - name: fodt_aar_maaned
+
+
+
+  - name: dim_skjelett_kvartal
+    columns:
+      - name: fk_dim_tid
+      - name: aar
+      - name: aar_kvartal_besk_kort
+      - name: aar_kvartal_besk
+      - name: aar_halvaar_besk_kort
+      - name: aar_halvaar_besk
+      - name: fk_dim_geografi   
+      - name: navarende_fylke_nr
+      - name: navarende_fylke_navn
+      - name: navarende_fylke_nr_navn
+      - name: navarende_kommune_nr
+      - name: navarende_kommune_navn
+      - name: navarende_kommune_nr_navn
+      - name: bydel_nr
+      - name: bydel_navn
+      - name: fk_dim_kjonn
+      - name: kjonn_kode
+      - name: kjonn_flertall_besk
+      - name: fk_dim_alder
+      - name: alder
+      - name: alder_gruppe1_besk
+      - name: ti_aar_gruppe_besk
+      - name: alder_gruppe5_besk
+      - name: alder_gruppe7_besk  

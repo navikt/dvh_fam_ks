@@ -24,8 +24,8 @@ final as (
     ks_fagsak f
   left outer join {{ source('dt_person', 'ident_off_id_til_fk_person1') }} b on
     f.person_ident = b.off_id
-    and b.gyldig_fra_dato <= f.kafka_mottatt_dato
-    and b.gyldig_til_dato >= f.kafka_mottatt_dato
+    and TRUNC(f.tidspunkt_vedtak, 'DD') >= b.gyldig_fra_dato
+    and TRUNC(f.tidspunkt_vedtak, 'DD') <= b.gyldig_til_dato
     and b.skjermet_kode = 0
 )
 

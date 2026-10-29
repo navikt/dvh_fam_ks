@@ -8,7 +8,8 @@ pre_final as (
     select *  from ks_meta_data,
       json_table(melding, '$'
         columns(
-          behandlings_id  NUMBER(38,0)  PATH  '$.behandlingsId',
+          behandlings_id    NUMBER(38,0)  PATH  '$.behandlingsId',
+          tidspunkt_vedtak  TIMESTAMP(9)    PATH    '$.tidspunktVedtak',
           nested                        PATH '$.vilkårResultater[*]'
           columns(
             resultat      VARCHAR2(255) PATH  '$.resultat',
@@ -27,6 +28,7 @@ pre_final as (
 final as (
     select 
         behandlings_id,
+        tidspunkt_vedtak,
         resultat,
         antall_timer,
         periode_fom,
