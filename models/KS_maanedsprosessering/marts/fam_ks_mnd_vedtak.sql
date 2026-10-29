@@ -27,6 +27,9 @@ with fact as (
         ,SISTE.KOMPETANSE_AKTIVITET
         ,SISTE.ANTALL_TIMER
         ,SISTE.BARNEHAGEPLASS_PROSENT
+        ,TO_DATE('{{ var("max_vedtaksdato") }}', 'yyyymmdd') MAX_VEDTAKSDATO        
+        ,{{ var("gyldig_flagg") }} GYLDIG_FLAGG
+        ,localtimestamp AS lastet_dato
 
     from {{ ref('int_ks_join_vilkaar') }} SISTE
 
@@ -45,7 +48,7 @@ select
     ,KLASSEKODE
     ,STONAD_FOM
     ,STONAD_TOM
-    ,UTBETALT_PER_MND
+    ,BELOPM -- alias
     ,KOMPETANSE_RESULTAT
     ,KOMPETANSE_AKTIVITET
     ,ANTALL_TIMER
