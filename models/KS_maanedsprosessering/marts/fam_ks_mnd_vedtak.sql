@@ -53,6 +53,9 @@ select
     ,KOMPETANSE_AKTIVITET
     ,ANTALL_TIMER
     ,BARNEHAGEPLASS_PROSENT
+    ,MAX_VEDTAKSDATO
+    ,GYLDIG_FLAGG
+    ,lastet_dato
 
 from fact
 -- Kunne like godt skrevet select *
