@@ -28,7 +28,8 @@ select
     ,t4.alder_gruppe5_besk
     ,t4.alder_gruppe7_besk
 from {{ source ('kode_verk', 'dim_tid') }} t1
-CROSS JOIN  {{ source ('kode_verk', 'dim_geografi') }} t2
+JOIN {{ source ('kode_verk', 'dim_geografi') }} t2 
+on t1.siste_dato_i_perioden between t2.funk_gyldig_fra_dato and t2.funk_gyldig_til_dato
 CROSS JOIN {{ source ('kode_verk', 'dim_kjonn') }} t3
 CROSS JOIN {{ source ('kode_verk', 'dim_alder') }} t4
 where t1.gyldig_flagg = 1

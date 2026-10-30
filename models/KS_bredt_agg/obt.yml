@@ -1,10 +1,6 @@
 models:
-  - name: obt_kontantstotte_mnd
-    columns:
-      - name: lastet_dato
-        description:  '{{ doc("lastet_dato") }}'
 
-  - name: obt_kontantstotte_kvartal        
+  - name: obt_fa_kontantstotte_kvartal        
     columns:
       - name: lastet_dato
         description:  '{{ doc("lastet_dato") }}'
