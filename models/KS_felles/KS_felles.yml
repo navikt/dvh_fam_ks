@@ -49,3 +49,4 @@ models:
       - name: ti_aar_gruppe_besk
       - name: alder_gruppe5_besk
       - name: alder_gruppe7_besk  
+      - name: alder_gruppe_familie
