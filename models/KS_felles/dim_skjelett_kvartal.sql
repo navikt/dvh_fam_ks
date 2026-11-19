@@ -27,6 +27,9 @@ select
     ,t4.ti_aar_gruppe_besk
     ,t4.alder_gruppe5_besk
     ,t4.alder_gruppe7_besk
+    ,case when t4.alder < 25 and t4.alder <> -1 then '24 år og yngre'
+    when t4.alder > 44 then '45 år og eldre'
+    else t4.alder_gruppe1_besk end as alder_gruppe_familie
 from {{ source ('kode_verk', 'dim_tid') }} t1
 JOIN {{ source ('kode_verk', 'dim_geografi') }} t2 
 on t1.siste_dato_i_perioden between t2.funk_gyldig_fra_dato and t2.funk_gyldig_til_dato
